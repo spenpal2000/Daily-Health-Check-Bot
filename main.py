@@ -15,7 +15,6 @@ def on_campus(schedule):
     Returns:
         bool: whether user is on campus or not
     """
-    
     days = 'UMTWRFS'
     today_num = datetime.today().isoweekday()
     today = days[today_num]
@@ -31,7 +30,6 @@ def submit_dhc(link, schedule):
         link (str): link to daily health check
         schedule (str): user's schedule
     """
-    
     response = {
         'status': 0,
         'message': '',
@@ -104,7 +102,6 @@ def main(request):
     Returns:
         str: a stringified json object.
     """
-    
     link = request.args.get('link')
     schedule = request.args.get('schedule')
     
