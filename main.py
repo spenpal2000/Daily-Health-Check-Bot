@@ -1,8 +1,17 @@
+###########
+# IMPORTS #
+###########
+
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import json
+
+
+#############
+# FUNCTIONS #
+#############
 
 def on_campus(schedule):
     """
@@ -46,7 +55,7 @@ def submit_dhc(link, schedule):
         web.get(link)
     except:
         response['status'] = 404
-        response['message'] = 'Invalid URL'
+        response['message'] = 'Invalid URL.'
         return response
     
     try:
@@ -68,7 +77,7 @@ def submit_dhc(link, schedule):
         submit_button.click()
     except:
         response['status'] = 400
-        response['message'] = 'Seems like this form has been filled out already or is not available'
+        response['message'] = 'Seems like this form has been filled out already or is not available.'
         return response
     
     try:
@@ -85,13 +94,17 @@ def submit_dhc(link, schedule):
         response['stats'] = '\n'.join([current_streak_msg, longest_streak_msg])
     except:
         response['status'] = 500
-        response['message'] = 'Cannot confirm form submission or grab form stats'
+        response['message'] = 'Cannot confirm form submission or grab form stats. Please check confirmation for form submission.'
         return response
         
     # Return successful response
     response['status'] = 200
-    response['message'] = 'Form was successfuly submitted'
+    response['message'] = 'Your daily health check form was successfully submitted!'
     return response
+
+########
+# MAIN #
+########
 
 def main(request):
     """
