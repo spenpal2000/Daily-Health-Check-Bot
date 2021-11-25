@@ -55,7 +55,7 @@ def submit_dhc(link, schedule):
         web.get(link)
     except:
         response['status'] = 404
-        response['message'] = 'Invalid URL.'
+        response['message'] = 'Missing or Invalid URL.'
         return response
     
     try:
