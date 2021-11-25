@@ -82,7 +82,7 @@ def submit_dhc(link, schedule):
     
     try:
         # Check for confirmation
-        success = web.find_element(By.XPATH, '//*[@id="surveyacknowledgment"]')
+        web.find_element(By.XPATH, '//*[@id="surveyacknowledgment"]')
         
         # Get Daily Heath Check stats
         current_streak = web.find_element(By.XPATH, '//*[@id="pagecontent"]/div/div[3]/p[1]/strong')
