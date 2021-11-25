@@ -119,6 +119,4 @@ def main(request):
     schedule = request.args.get('schedule')
     
     response = submit_dhc(link=link, schedule=schedule)
-    response_json = json.dumps(response)
-    
-    return response_json
+    return response
