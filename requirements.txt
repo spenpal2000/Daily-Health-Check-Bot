@@ -1,2 +1,2 @@
-selenium
-chromedriver-binary
+selenium==4.1.0
+chromedriver-binary==96.0.4664.45
