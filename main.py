@@ -2,6 +2,7 @@
 # IMPORTS #
 ###########
 
+import chromedriver_binary  # Adds chromedriver binary to path
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -115,8 +116,10 @@ def main(request):
     Returns:
         str: a stringified json object.
     """
-    link = request.args.get('link')
-    schedule = request.args.get('schedule')
+    link = 'https://redcap.utdallas.edu/surveys/?s=uVJaAoFK472xINgD'
+    schedule = 'MTWR'
     
     response = submit_dhc(link=link, schedule=schedule)
     return response
+
+print(main(None))
