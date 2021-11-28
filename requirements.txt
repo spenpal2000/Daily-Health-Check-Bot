@@ -1,2 +1,5 @@
-selenium==4.1.0
-chromedriver-binary==96.0.4664.45
+chromedriver-binary-auto
+fastapi
+selenium
+uvicorn
+gunicorn
