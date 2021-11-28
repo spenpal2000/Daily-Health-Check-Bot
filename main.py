@@ -2,11 +2,12 @@
 # IMPORTS #
 ###########
 
-import chromedriver_binary  # Adds chromedriver binary to path
 from datetime import datetime
+from fastapi import FastAPI
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+import chromedriver_binary  # Adds chromedriver binary to path
 import json
 
 
@@ -23,7 +24,7 @@ def on_campus(schedule):
         FORMAT: "Schedule: [UMTWRFS]*"
 
     Returns:
-        bool: whether user is on campus or not
+        bool: whether user is on campus today or not
     """
     days = 'UMTWRFS'
     today_num = datetime.today().isoweekday()
@@ -95,31 +96,32 @@ def submit_dhc(link, schedule):
         response['stats'] = '\n'.join([current_streak_msg, longest_streak_msg])
     except:
         response['status'] = 500
-        response['message'] = 'Cannot confirm form submission or grab form stats. Please check confirmation for form submission.'
+        response['message'] = 'Cannot confirm form submission or grab form stats. Please check confirmation of form submission.'
         return response
         
     # Return successful response
     response['status'] = 200
-    response['message'] = 'Your daily health check form was successfully submitted!'
+    response['message'] = 'Your daily health check has been successfully submitted!'
     return response
+
 
 ########
 # MAIN #
 ########
 
-def main(request):
+app = FastAPI()
+
+@app.get("/")
+def main(link: str = '', schedule: str = ''):
     """
     Complete Daily Health Check form
-    
-    Args:
-        request (flask.Request): The request object.
-    Returns:
-        str: a stringified json object.
-    """
-    link = 'https://redcap.utdallas.edu/surveys/?s=uVJaAoFK472xINgD'
-    schedule = 'MTWR'
-    
-    response = submit_dhc(link=link, schedule=schedule)
-    return response
 
-print(main(None))
+    Args:
+        link (str, optional): Link to REDCap. Defaults to ''.
+        schedule (str, optional): Campus schedule of user. Defaults to ''.
+
+    Returns:
+        dict: response to user
+    """
+    response = submit_dhc(link, schedule)
+    return response
