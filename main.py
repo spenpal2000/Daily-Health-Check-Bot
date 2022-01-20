@@ -48,6 +48,7 @@ def submit_dhc(link, schedule):
     }
     
     chrome_options = Options()
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
@@ -123,5 +124,8 @@ def main(link: str = '', schedule: str = ''):
     Returns:
         dict: response to user
     """
+    if not (link or schedule):
+        return {}
+    
     response = submit_dhc(link, schedule)
     return response
